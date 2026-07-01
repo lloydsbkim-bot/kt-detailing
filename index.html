@@ -144,22 +144,6 @@
   .nav-links a:hover,
   .nav-links a.active { color: var(--orange); }
 
-  .nav-cta {
-    display: none;
-  }
-
-  @media (min-width: 560px) {
-    .nav-cta {
-      display: inline-block;
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--on-accent);
-      background: var(--orange);
-      padding: 8px 14px;
-      border-radius: 6px;
-    }
-  }
-
   /* ===================== HOME / HERO ===================== */
   .hero {
     position: relative;
@@ -521,11 +505,11 @@
 
   .field-row {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     gap: 16px;
   }
 
-  @media (max-width: 380px) {
+  @media (max-width: 520px) {
     .field-row { grid-template-columns: 1fr; }
   }
 
@@ -541,15 +525,19 @@
 
   input, select, textarea {
     width: 100%;
+    min-width: 0;
     background: var(--bg-raised);
     border: 1px solid var(--border-strong);
     border-radius: 8px;
-    padding: 12px 14px;
+    padding: 12px 12px;
     color: var(--white);
     font-family: var(--font-body);
     font-size: 14px;
+    text-overflow: ellipsis;
     transition: border-color 0.2s ease;
   }
+
+  input[type="date"] { color-scheme: light; }
 
   input::placeholder, textarea::placeholder { color: var(--gray-dim); }
 
@@ -653,7 +641,6 @@
       <li><a href="#faq" class="nav-link" data-section="faq">FAQ</a></li>
       <li><a href="#contact" class="nav-link" data-section="contact">Contact</a></li>
     </ul>
-    <a href="#contact" class="nav-cta">Book Now</a>
   </div>
 </nav>
 
@@ -715,7 +702,7 @@
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.5-7-12a7 7 0 1 1 14 0c0 5.5-7 12-7 12Z"/><circle cx="12" cy="9" r="2.5"/></svg>
       <div>
         <div class="area-title">Service Area</div>
-        <div class="area-text">Currently serving the Barrie South region only. Need it done at your place? Mobile detailing at your home may be available — just ask when you book and we'll see what we can arrange.</div>
+        <div class="area-text">We come to you — currently serving the Barrie South region. Book from anywhere in the area and we'll bring everything needed to detail your car at your home or workplace.</div>
       </div>
     </div>
   </section>
@@ -780,7 +767,7 @@
       </details>
       <details class="faq-item">
         <summary>Do I need to provide water or power?</summary>
-        <p>If the detail is happening at your home, access to an outdoor water tap and power outlet is appreciated but not always required — ask when booking and we'll work it out.</p>
+        <p>Yes — please have an outdoor water tap and power outlet accessible at the location. We bring our own hoses and equipment, but need access to your water and power to get the job done.</p>
       </details>
       <details class="faq-item">
         <summary>What forms of payment do you accept?</summary>
@@ -862,7 +849,7 @@
         <div class="field-row">
           <div>
             <label for="vehicle">Vehicle (year/make/model)</label>
-            <input type="text" id="vehicle" name="vehicle" placeholder="2019 Honda Civic">
+            <input type="text" id="vehicle" name="vehicle" placeholder="e.g. Honda Civic">
           </div>
           <div>
             <label for="preferred-date">Preferred date</label>
@@ -871,8 +858,8 @@
         </div>
 
         <div>
-          <label for="location">Location</label>
-          <input type="text" id="location" name="location" placeholder="Your address, or 'I'll come to you'">
+          <label for="location">Your address</label>
+          <input type="text" id="location" name="location" placeholder="Where should we come to detail your car?" required>
         </div>
 
         <div>
