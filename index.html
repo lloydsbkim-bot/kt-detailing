@@ -763,23 +763,23 @@
     <div class="faq-list">
       <details class="faq-item">
         <summary>How long does a detail take?</summary>
-        <p>Exterior details typically take about 1–2 hours. Interior and full package details usually take 3–5 hours depending on the vehicle's size and condition.</p>
+        <p>An exterior detail typically takes about 1 to 2 hours.</p>
       </details>
       <details class="faq-item">
         <summary>Do I need to provide water or power?</summary>
-        <p>Yes — please have an outdoor water tap and power outlet accessible at the location. We bring our own hoses and equipment, but need access to your water and power to get the job done.</p>
+        <p>Yes — a garden hose is needed for exterior cleaning, and access to power from your home will likely be required as well.</p>
       </details>
       <details class="faq-item">
         <summary>What forms of payment do you accept?</summary>
-        <p>Cash, e-transfer, and most major cards are accepted. Payment is due upon completion.</p>
+        <p>Cash is preferred, though e-transfer is also accepted.</p>
       </details>
       <details class="faq-item">
         <summary>What happens if it rains on my scheduled day?</summary>
-        <p>We'll reach out ahead of time to reschedule at no extra cost if weather isn't cooperating, especially for exterior work.</p>
+        <p>If it rains, we'll either reschedule or complete an interior-only detail, though results may not be as thorough as usual in that case.</p>
       </details>
       <details class="faq-item">
         <summary>How far in advance should I book?</summary>
-        <p>We take a limited number of slots each week, so booking a few days ahead is recommended, especially for weekend appointments.</p>
+        <p>Booking at least 1 to 2 days in advance is recommended, though we'll do our best to accommodate shorter notice when possible.</p>
       </details>
     </div>
   </section>
@@ -797,14 +797,14 @@
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92Z"/></svg>
           <div>
             <div class="info-label">Phone</div>
-            <div class="info-value"><a href="tel:XXXXXXXXXX">(XXX) XXX-XXXX</a></div>
+            <div class="info-value"><a href="tel:7058173333">(705) 817-3333</a></div>
           </div>
         </div>
         <div class="info-item">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z" style="display:none;"/><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
           <div>
             <div class="info-label">Email</div>
-            <div class="info-value"><a href="mailto:email@example.com">email@example.com</a></div>
+            <div class="info-value"><a href="mailto:kylerandtoandetailing@gmail.com">kylerandtoandetailing@gmail.com</a></div>
           </div>
         </div>
         <div class="info-item">
@@ -823,7 +823,7 @@
         </div>
       </div>
 
-      <form id="booking-form">
+      <form id="booking-form" action="https://formspree.io/f/xgojnpnv" method="POST">
         <div class="field-row">
           <div>
             <label for="name">Your name</label>
@@ -868,7 +868,7 @@
         </div>
 
         <button type="submit" class="submit-btn">Request This Booking</button>
-        <p class="form-note">This opens your email app with the details filled in — just hit send.</p>
+        <p class="form-note">This sends your request straight to us — no email app needed.</p>
       </form>
     </div>
   </section>
@@ -878,7 +878,7 @@
     <div class="footer-info">
       <div><strong>K&amp;T Detailing</strong></div>
       <div>Barrie South, ON</div>
-      <div><a href="tel:XXXXXXXXXX" class="footer-link">Call</a> or <a href="mailto:email@example.com" class="footer-link">message</a> to schedule</div>
+      <div><a href="tel:7058173333" class="footer-link">Call</a> or <a href="mailto:kylerandtoandetailing@gmail.com" class="footer-link">message</a> to schedule</div>
     </div>
   </footer>
 
@@ -888,53 +888,47 @@
 
 <script>
   // ============================================================
-  // CONTACT INFO — replace these placeholders with the real
-  // phone number and email, then update every tel:/mailto: link
-  // above (search this file for "XXXXXXXXXX" and "email@example.com").
+  // Booking form submits directly to Formspree — no email app
+  // required. Submissions land in kylerandtoandetailing@gmail.com.
   // ============================================================
-  const BUSINESS_EMAIL = "email@example.com"; // <-- put real email here
+  const FORMSPREE_ENDPOINT = "https://formspree.io/f/xgojnpnv";
 
-  // ---- Booking form: builds a pre-filled email ----
   const form = document.getElementById('booking-form');
   const toast = document.getElementById('toast');
+  const submitBtn = form.querySelector('.submit-btn');
 
   function showToast(msg) {
     toast.textContent = msg;
     toast.classList.add('show');
-    setTimeout(() => toast.classList.remove('show'), 3500);
+    setTimeout(() => toast.classList.remove('show'), 4500);
   }
 
-  form.addEventListener('submit', function (e) {
+  form.addEventListener('submit', async function (e) {
     e.preventDefault();
 
-    const data = {
-      name: form.name.value.trim(),
-      phone: form.phone.value.trim(),
-      service: form.service.value,
-      vehicle: form.vehicle.value.trim() || 'Not specified',
-      date: form['preferred-date'].value || 'Not specified',
-      location: form.location.value.trim() || 'Not specified',
-      message: form.message.value.trim() || 'None'
-    };
+    const originalBtnText = submitBtn.textContent;
+    submitBtn.textContent = 'Sending…';
+    submitBtn.disabled = true;
 
-    const subject = `Booking Request: ${data.service} — ${data.name}`;
-    const body =
-`New booking request from the website:
+    try {
+      const response = await fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: new FormData(form)
+      });
 
-Name: ${data.name}
-Phone: ${data.phone}
-Service: ${data.service}
-Vehicle: ${data.vehicle}
-Preferred date: ${data.date}
-Location: ${data.location}
-
-Notes:
-${data.message}`;
-
-    const mailtoLink = `mailto:${BUSINESS_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-
-    window.location.href = mailtoLink;
-    showToast("Opening your email app with the request filled in…");
+      if (response.ok) {
+        showToast("Thanks! Your booking request has been sent — we'll be in touch soon.");
+        form.reset();
+      } else {
+        showToast("Something went wrong. Please call or email us directly.");
+      }
+    } catch (err) {
+      showToast("Something went wrong. Please call or email us directly.");
+    } finally {
+      submitBtn.textContent = originalBtnText;
+      submitBtn.disabled = false;
+    }
   });
 
   // ---- Nav: highlight the active section while scrolling ----
